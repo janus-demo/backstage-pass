@@ -1,0 +1,39 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "backstage-pass"
+  annotations:
+    argocd/app-name: backstage-pass-dev
+    backstage.io/kubernetes-id: backstage-pass
+    backstage.io/kubernetes-namespace: backstage-pass-dev
+    janus-idp.io/tekton-enabled : 'true'
+    github.com/project-slug: janus-demo/backstage-pass
+    quay.io/repository-slug: "janus-demo/backstage-pass"
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://devspaces.apps.cluster-x7g75.x7g75.sandbox243.opentlc.com/#https://github.com/janus-demo/backstage-pass?che-editor=che-incubator/che-code/insiders&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces.apps.cluster-x7g75.x7g75.sandbox243.opentlc.com/#https://github.com/janus-demo/backstage-pass?che-editor=che-incubator/che-idea/latest&devfilePath=.devfile-intellij.yaml
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "group:default/rd"
+  providesApis:
+    - "backstage-pass"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: "backstage-pass"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "group:default/rd"
+  definition:
+    $text: ./openapi.yaml
